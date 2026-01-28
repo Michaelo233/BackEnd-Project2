@@ -1,0 +1,28 @@
+{
+  "name": "backend-project2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michaelo233/BackEnd-Project2.git"
+  },
+  "keywords": [],
+  "author": "Michael Obikwere",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Michaelo233/BackEnd-Project2/issues"
+  },
+  "homepage": "https://github.com/Michaelo233/BackEnd-Project2#readme"
+}
