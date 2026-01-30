@@ -4,5 +4,5 @@ export interface Ticket {
     description: string;
     priority: string;
     status: string;
-    date: string;
+    createdAt: string;
 }
