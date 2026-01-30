@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { HTTP_STATUS } from "src/constants/httpConstants";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { Ticket } from "../models/ticketModel";
 import * as tickerService from "../services/ticketServices";
 // import { tickets } from "src/data/ticketData";
