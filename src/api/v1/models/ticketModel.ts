@@ -5,4 +5,7 @@ export interface Ticket {
     priority: string;
     status: string;
     createdAt: string;
+    ticketAge?: number;
+    urgencyScore?: number;
+    urgencyLevel?: string;
 }
