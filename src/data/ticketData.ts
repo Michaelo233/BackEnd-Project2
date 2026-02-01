@@ -112,3 +112,18 @@ export const urgencyScore = (id: number): number => {
     return urgencyScore
 }
 
+export const urgencyLevel = (id: number): string => {
+    const score = urgencyScore(id);
+    const urgencyLevel: string =
+    score >= 80
+    ? "Critical. Immediate attention required."
+    :score >=55
+    ? "High urgency. Prioritize resolution."
+    :score >= 30
+    ? "Moderate. Schedule for attention."
+    :score >= 25
+    ? "Low urgency. Address when capacity allows."
+    : "Minimal. Ticket resolved."
+
+    return urgencyLevel
+}
