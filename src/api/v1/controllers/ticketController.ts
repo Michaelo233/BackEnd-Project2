@@ -34,3 +34,58 @@ export const getTicketUrgency = async(req: Request, res: Response): Promise<void
         });
     }
 }
+
+export const createTicket = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const {
+            title,
+            description,
+            priority
+        }: {
+            title: string | undefined;
+            description: string | undefined;
+            priority: string | undefined;
+        } = req.body;
+        
+        // Validate required fields
+        if (!title) {
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Missing required field: title",
+            });
+        } else if (!description){
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Missing required field: description",
+            });
+            
+        } else if (!priority){
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Missing required field: priority",
+            });
+            
+        } else if (priority !== "critical" && priority !== "high" && priority !== "medium" && priority !== "low"){
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Invalid priority. Must be one of: critical, high, medium, low",
+            });
+            
+        } else {
+            // Explicitly extract only the fields our service needs
+            // This is necessary because Pick/Omit only work at compile time
+            const ticketData: { title: string; description: string; priority: string} = {
+                title,
+                description,
+                priority
+            };
+
+            const newTicket = await tickerService.createTicket(ticketData);
+
+            res.status(HTTP_STATUS.CREATED).json({
+                message: "Ticket created successfully",
+                data: newTicket,
+            });
+        }
+    } catch (error) {
+        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+            message: "Failed to create ticket",
+        });
+    }
+};
