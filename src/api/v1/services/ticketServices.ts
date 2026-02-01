@@ -64,3 +64,13 @@ export const updateTicket = async (
 
     return structuredClone(tickets[index]);
 };
+
+export const deleteTicket = async (id: number): Promise<void> => {
+    const index: number = tickets.findIndex((ticket: Ticket) => ticket.id === id)
+
+    if (index === -1) {
+        throw new Error (`Ticket with ID ${id} not found.`);
+    }
+
+    tickets.splice(index, 1);
+};
