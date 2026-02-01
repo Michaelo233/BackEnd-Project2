@@ -9,11 +9,28 @@ export const getAllTickets = async(req: Request, res: Response, next:NextFunctio
         const tickets: Ticket[] = await tickerService.getAllTickets();
 
         res.status(HTTP_STATUS.OK).json({
-            message: "Tickets retrieved",
+            message: "Tickets retrieved.",
             count: tickets.length,
             data: tickets,
         });
     } catch (error) {
         next(error);
+    }
+}
+
+export const getTicketUrgency = async(req: Request, res: Response): Promise<void> => {
+    try{
+        const id = req.params.id;
+
+        const ticket = await tickerService.getTicketUrgency(Number(id));
+
+        res.status(HTTP_STATUS.OK).json({
+            message: "Ticket urgency calculated.",
+            data: ticket,
+        });
+    } catch (error) {
+        res.status(HTTP_STATUS.NOT_FOUND).json({
+            message: "Ticket not found"
+        });
     }
 }
