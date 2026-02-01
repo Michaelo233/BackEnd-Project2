@@ -86,3 +86,29 @@ export const ticketAge = (id: number): number => {
     return ticketAge
 }
 
+export const urgencyScore = (id: number): number => {
+    const ticket = tickets.find(ticket => ticket.id === id)
+    
+    if (!ticket) {
+        throw new Error(`Ticket with id ${id} not found`);
+    }
+
+    const BaseScore: number = 
+    ticket.priority === "critical"
+    ? 50
+    : ticket.priority === "high"
+    ? 30
+    : ticket.priority === "medium"
+    ? 20
+    : 10
+
+    const urgencyScore: number = BaseScore + (ticketAge(ticket.id) * 5)
+
+    if (ticket.status === "resolved"){
+        return 0
+    }
+
+
+    return urgencyScore
+}
+
