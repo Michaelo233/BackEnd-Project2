@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { Ticket } from "../models/ticketModel";
-import * as tickerService from "../services/ticketServices";
+import * as ticketService from "../services/ticketServices";
 // import { tickets } from "src/data/ticketData";
 
 export const getAllTickets = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
     try{
-        const tickets: Ticket[] = await tickerService.getAllTickets();
+        const tickets: Ticket[] = await ticketService.getAllTickets();
 
         res.status(HTTP_STATUS.OK).json({
             message: "Tickets retrieved.",
@@ -22,7 +22,7 @@ export const getTicketUrgency = async(req: Request, res: Response): Promise<void
     try{
         const id = req.params.id;
 
-        const ticket = await tickerService.getTicketUrgency(Number(id));
+        const ticket = await ticketService.getTicketUrgency(Number(id));
 
         res.status(HTTP_STATUS.OK).json({
             message: "Ticket urgency calculated.",
@@ -76,7 +76,7 @@ export const createTicket = async (req: Request, res: Response): Promise<void> =
                 priority
             };
 
-            const newTicket = await tickerService.createTicket(ticketData);
+            const newTicket = await ticketService.createTicket(ticketData);
 
             res.status(HTTP_STATUS.CREATED).json({
                 message: "Ticket created successfully",
@@ -107,7 +107,7 @@ export const updateTicket = async(req: Request, res: Response, next:NextFunction
         } else {
             const updateData = {priority, status};
     
-            const updateTicket = await tickerService.updateTicket(Number(id), updateData)
+            const updateTicket = await ticketService.updateTicket(Number(id), updateData)
     
             res.status(HTTP_STATUS.OK).json({
                 message: "Ticket updated successfully",
@@ -116,5 +116,21 @@ export const updateTicket = async(req: Request, res: Response, next:NextFunction
         }
     } catch(error) {
         next(error);
+    }
+};
+
+export const deleteTicket = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
+    try{
+        const id = req.params.id;
+        
+        await ticketService.deleteTicket(Number(id))
+        
+        res.status(HTTP_STATUS.OK).json({
+            message: "Ticket deleted successfully",
+        });
+    } catch(error) {
+        res.status(HTTP_STATUS.NOT_FOUND).json({
+            message: "Ticket not found.",
+        });
     }
 };
