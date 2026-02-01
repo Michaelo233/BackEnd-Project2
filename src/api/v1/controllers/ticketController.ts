@@ -89,3 +89,32 @@ export const createTicket = async (req: Request, res: Response): Promise<void> =
         });
     }
 };
+
+export const updateTicket = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
+    try{
+        const id = req.params.id;
+
+        const {priority, status} = req.body;
+        
+        if (priority !== "critical" && priority !== "high" && priority !== "medium" && priority !== "low"){
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Invalid priority. Must be one of: critical, high, medium, low",
+            });
+        } else if (status !== "open" && status !== "in-progress" && status !== "resolved") {
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Invalid status. Must be one of: open, in-progress, resolved",
+            });
+        } else {
+            const updateData = {priority, status};
+    
+            const updateTicket = await tickerService.updateTicket(Number(id), updateData)
+    
+            res.status(HTTP_STATUS.OK).json({
+                message: "Ticket updated successfully",
+                data: updateTicket,
+            });
+        }
+    } catch(error) {
+        next(error);
+    }
+};
