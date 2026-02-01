@@ -73,3 +73,16 @@ export const tickets: Ticket[] = [
     }
 ];
 
+export const ticketAge = (id: number): number => {
+
+    const ticket = tickets.find(ticket => ticket.id === id);
+    if (!ticket) {
+        throw new Error(`Ticket with id ${id} not found`);
+    }
+
+    const age = new Date().getTime() - new Date(ticket.createdAt).getTime();
+    const ticketAge = Math.floor(age / (1000 * 60 * 60 * 24))
+
+    return ticketAge
+}
+
