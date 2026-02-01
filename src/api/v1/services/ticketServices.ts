@@ -44,3 +44,23 @@ export const createTicket = async (ticketData: {
     tickets.push(newTicket);
     return structuredClone(newTicket)
 };
+
+export const updateTicket = async (
+    id: number,
+    ticketData: Pick<Ticket, "priority" | "status">
+): Promise<Ticket> => {
+    const index: number = tickets.findIndex((ticket: Ticket) => ticket.id === id);
+
+    if (index === -1) {
+        throw new Error(`Ticket with ID ${id} not found`);
+    }
+
+    // Update the item with the provided fields
+    tickets[index] = {
+        ...tickets[index],
+        ...ticketData,
+        updatedAt: new Date().toISOString(),
+    };
+
+    return structuredClone(tickets[index]);
+};
