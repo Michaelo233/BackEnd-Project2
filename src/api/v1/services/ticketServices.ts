@@ -24,3 +24,23 @@ export const getTicketUrgency = async (id: number): Promise<Ticket> => {
 
     return structuredClone(ticketUrgency)
 }
+
+export const createTicket = async (ticketData: {
+    title: string;
+    description: string;
+    priority: string;
+
+}): Promise<Ticket> => {
+
+    const newTicket: Ticket = {
+        id: tickets.length + 1,
+        title: ticketData.title,
+        description: ticketData.description,
+        priority: ticketData.priority,
+        status: "open",
+        createdAt: new Date().toISOString() 
+    };
+
+    tickets.push(newTicket);
+    return structuredClone(newTicket)
+};
