@@ -1,5 +1,13 @@
 import { Ticket } from "src/api/v1/models/ticketModel";
 
+const ticketDate = (days: number): string => {
+    const today = new Date();
+    const date = new Date(today);
+    date.setDate(date.getDate() - days);
+
+    return date.toISOString();
+}
+
 export const tickets: Ticket[] = [
     {
         id: 1,
@@ -7,7 +15,7 @@ export const tickets: Ticket[] = [
         description: "Footer still shows 2024",
         priority: "low",
         status: "open",
-        createdAt: "2025-01-12T10:00:00.000Z"
+        createdAt: ticketDate(3)
     },
 
     {
@@ -16,7 +24,7 @@ export const tickets: Ticket[] = [
         description: "Upload takes 30+ seconds",
         priority: "medium",
         status: "open",
-        createdAt: "2025-01-13T10:00:00.000Z"
+        createdAt: ticketDate(2)
     },
 
     {
@@ -25,7 +33,7 @@ export const tickets: Ticket[] = [
         description: "Dashboard takes 10+ seconds to load",
         priority: "medium",
         status: "open",
-        createdAt: "2025-01-09T10:00:00.000Z" 
+        createdAt: ticketDate(6) 
     },
     
     {
@@ -34,7 +42,7 @@ export const tickets: Ticket[] = [
         description: "Reset emails taking over 30 minutes",
         priority: "high",
         status: "open",
-        createdAt: "2025-01-10T10:00:00.000Z" 
+        createdAt: ticketDate(5) 
     },
     
     {
@@ -43,7 +51,7 @@ export const tickets: Ticket[] = [
         description: "PDF export fails silently",
         priority: "high",
         status: "open",
-        createdAt: "2025-01-06T10:00:00.000Z" 
+        createdAt: ticketDate(9) 
     },
     
     {
@@ -52,7 +60,7 @@ export const tickets: Ticket[] = [
         description: "Users report blank screen on login",
         priority: "critical",
         status: "open",
-        createdAt: "2025-01-09T10:00:00.000Z" 
+        createdAt: ticketDate(6) 
     },
 
     {
@@ -61,6 +69,7 @@ export const tickets: Ticket[] = [
         description: "Dark mode doesn't persist after refresh",
         priority: "medium",
         status: "resolved",
-        createdAt: "2025-01-05T10:00:00.000Z" 
+        createdAt: ticketDate(10) 
     }
-]
+];
+
