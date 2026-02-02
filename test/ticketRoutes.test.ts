@@ -1,7 +1,6 @@
 import request from "supertest";
 import app from "../src/app";
 import * as ticketController from "../src/api/v1/controllers/ticketController"
-// import { createTicket, deleteTicket, getAllTickets, updateTicket, getTicketUrgency } from "../src/api/v1/services/ticketServices";
 import { HTTP_STATUS } from "../src/constants/httpConstants";
 // import { response } from "express";
 
@@ -36,7 +35,7 @@ describe("Ticket API Endpoints", () => {
     // test createTicket API endpoint
     describe("POST /api/v1/tickets", () => {
         it("should call createTicket controller", async () => {
-            const mockData = {
+            const mockData: {title: string; description: string; priority: string} = {
                 title: "Test Ticket",
                 description: "Test Ticket description",
                 priority: "critical"
@@ -49,7 +48,7 @@ describe("Ticket API Endpoints", () => {
     // test updateTicket API endpoint
     describe("PUT /api/v1/tickets/:id", () => {
         it("should call updateTicket controller", async () => {
-            const mockData = {
+            const mockData: {priority: string; status: string} = {
                 priority: "high",
                 status: "resolved",
             };
@@ -69,7 +68,7 @@ describe("Ticket API Endpoints", () => {
     // test for missing parameter in createTicket API endpoint
     describe("POST /api/v1/tickets", () => {
         it("should validate missing param", async () => {
-        const response = await request(app).post("/api/v1/tickets").send({});
+        const response: any = await request(app).post("/api/v1/tickets").send({});
         // expect(response.status).toBe(400);
         expect(response.status).toBeDefined();
         });
@@ -78,7 +77,7 @@ describe("Ticket API Endpoints", () => {
     // test for missing parameter in updateTickets API endpoint
     describe("PUT /api/v1/tickets/:id", () => {
         it("should validate missing param", async () => {
-        const response = await request(app).put("/api/v1/tickets/1").send({});
+        const response: any = await request(app).put("/api/v1/tickets/1").send({});
         // expect(response.status).toBe(400);
         expect(response.status).toBeDefined();
         });

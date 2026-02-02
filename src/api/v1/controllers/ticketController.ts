@@ -91,9 +91,12 @@ export const createTicket = async (req: Request, res: Response): Promise<void> =
 
 export const updateTicket = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
     try{
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
 
-        const {priority, status} = req.body;
+        const {priority, status}: {
+            priority: string | undefined;
+            status: string | undefined;
+        } = req.body;
         
         if (priority !== "critical" && priority !== "high" && priority !== "medium" && priority !== "low"){
             res.status(HTTP_STATUS.BAD_REQUEST).json({
@@ -104,9 +107,9 @@ export const updateTicket = async(req: Request, res: Response, next:NextFunction
                 message: "Invalid status. Must be one of: open, in-progress, resolved",
             });
         } else {
-            const updateData = {priority, status};
+            const updateData: {priority: string; status: string} = {priority, status};
     
-            const updateTicket = await ticketService.updateTicket(Number(id), updateData)
+            const updateTicket: Ticket = await ticketService.updateTicket(id, updateData)
     
             res.status(HTTP_STATUS.OK).json({
                 message: "Ticket updated successfully",
@@ -118,11 +121,11 @@ export const updateTicket = async(req: Request, res: Response, next:NextFunction
     }
 };
 
-export const deleteTicket = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
+export const deleteTicket = async(req: Request, res: Response): Promise<void> => {
     try{
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
         
-        await ticketService.deleteTicket(Number(id))
+        await ticketService.deleteTicket(id)
         
         res.status(HTTP_STATUS.NO_CONTENT).json({
             message: "Ticket deleted successfully",

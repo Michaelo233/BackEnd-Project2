@@ -161,7 +161,7 @@ describe("Ticket Controller", () => {
 
     describe("getTicketUrgency services", () => {
         it("should handle error", async () => {
-            const mockError = new Error("Test Error");
+            const mockError: any = new Error("Test Error");
 
 
             (ticketService.getTicketUrgency as jest.Mock).mockRejectedValue(mockError);

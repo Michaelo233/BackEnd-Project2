@@ -9,7 +9,7 @@ export const getAllTickets = async (): Promise<Ticket[]> => {
 
 // service to get ticket urgency
 export const getTicketUrgency = async (id: number): Promise<Ticket> => {
-    const ticket = tickets.find(ticket => ticket.id === id)
+    const ticket: Ticket | undefined = tickets.find(ticket => ticket.id === id)
     if(!ticket) {
         throw new Error(`Event with ID ${id} not found`);
     }

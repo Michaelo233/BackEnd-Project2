@@ -1,8 +1,8 @@
 import { Ticket } from "src/api/v1/models/ticketModel";
 
 export const ticketDate = (days: number): string => {
-    const today = new Date();
-    const date = new Date(today);
+    const today: Date = new Date();
+    const date: Date = new Date(today);
     date.setDate(date.getDate() - days);
 
     return date.toISOString();
@@ -75,19 +75,19 @@ export const tickets: Ticket[] = [
 
 export const ticketAge = (id: number): number => {
 
-    const ticket = tickets.find(ticket => ticket.id === id);
+    const ticket: Ticket | undefined = tickets.find(ticket => ticket.id === id);
     if (!ticket) {
         throw new Error(`Ticket with id ${id} not found`);
     }
 
-    const age = new Date().getTime() - new Date(ticket.createdAt).getTime();
-    const ticketAge = Math.floor(age / (1000 * 60 * 60 * 24))
+    const age: number = new Date().getTime() - new Date(ticket.createdAt).getTime();
+    const ticketAge: number = Math.floor(age / (1000 * 60 * 60 * 24))
 
     return ticketAge
 }
 
 export const urgencyScore = (id: number): number => {
-    const ticket = tickets.find(ticket => ticket.id === id)
+    const ticket: Ticket | undefined = tickets.find(ticket => ticket.id === id)
     
     if (!ticket) {
         throw new Error(`Ticket with id ${id} not found`);
@@ -113,7 +113,7 @@ export const urgencyScore = (id: number): number => {
 }
 
 export const urgencyLevel = (id: number): string => {
-    const score = urgencyScore(id);
+    const score: number = urgencyScore(id);
     const urgencyLevel: string =
     score >= 80
     ? "Critical. Immediate attention required."
