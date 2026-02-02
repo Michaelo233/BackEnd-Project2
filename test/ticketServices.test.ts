@@ -17,7 +17,7 @@ describe("Ticket Controller", () => {
     // test GetAllProducts Controller
     describe("getTicket services", () => {
         it("should handle successful operation", async () => {
-            const mockItems = [
+            const mockItems: Ticket[] = [
                 { 
                     id: 1,
                     title: "Update footer copyright year",
@@ -29,7 +29,7 @@ describe("Ticket Controller", () => {
             ];
 
             (ticketService.getAllTickets as jest.Mock).mockResolvedValue(mockItems);
-            const result = await ticketService.getAllTickets();
+            const result: Ticket[] = await ticketService.getAllTickets();
             expect(ticketService.getAllTickets).toHaveBeenCalled();
             expect(result).toEqual(mockItems)
         });
@@ -60,7 +60,7 @@ describe("Ticket Controller", () => {
             };
 
             (ticketService.getTicketUrgency as jest.Mock).mockResolvedValue(calUrgency);
-            const result = await ticketService.getTicketUrgency(mockItems.id);
+            const result: Ticket = await ticketService.getTicketUrgency(mockItems.id);
             expect(ticketService.getTicketUrgency).toHaveBeenCalledWith(mockItems.id);
             expect(result).toEqual(calUrgency)
         });
@@ -91,7 +91,7 @@ describe("Ticket Controller", () => {
             };
 
             (ticketService.getTicketUrgency as jest.Mock).mockResolvedValue(calUrgency);
-            const result = await ticketService.getTicketUrgency(mockItems.id);
+            const result: Ticket = await ticketService.getTicketUrgency(mockItems.id);
             expect(ticketService.getTicketUrgency).toHaveBeenCalledWith(mockItems.id);
             expect(result).toEqual(calUrgency)
         });
@@ -122,7 +122,7 @@ describe("Ticket Controller", () => {
             };
 
             (ticketService.getTicketUrgency as jest.Mock).mockResolvedValue(calUrgency);
-            const result = await ticketService.getTicketUrgency(mockItems.id);
+            const result: Ticket = await ticketService.getTicketUrgency(mockItems.id);
             expect(ticketService.getTicketUrgency).toHaveBeenCalledWith(mockItems.id);
             expect(result).toEqual(calUrgency)
         });
@@ -153,7 +153,7 @@ describe("Ticket Controller", () => {
             };
 
             (ticketService.getTicketUrgency as jest.Mock).mockResolvedValue(calUrgency);
-            const result = await ticketService.getTicketUrgency(mockItems.id);
+            const result:Ticket = await ticketService.getTicketUrgency(mockItems.id);
             expect(ticketService.getTicketUrgency).toHaveBeenCalledWith(mockItems.id);
             expect(result).toEqual(calUrgency)
         });

@@ -2,8 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { Ticket } from "../models/ticketModel";
 import * as ticketService from "../services/ticketServices";
-// import { tickets } from "src/data/ticketData";
-
+ 
 export const getAllTickets = async(req: Request, res: Response, next:NextFunction): Promise<void> => {
     try{
         const tickets: Ticket[] = await ticketService.getAllTickets();
@@ -20,9 +19,9 @@ export const getAllTickets = async(req: Request, res: Response, next:NextFunctio
 
 export const getTicketUrgency = async(req: Request, res: Response): Promise<void> => {
     try{
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
 
-        const ticket = await ticketService.getTicketUrgency(Number(id));
+        const ticket: Ticket = await ticketService.getTicketUrgency(id);
 
         res.status(HTTP_STATUS.OK).json({
             message: "Ticket urgency calculated.",
@@ -30,7 +29,7 @@ export const getTicketUrgency = async(req: Request, res: Response): Promise<void
         });
     } catch (error) {
         res.status(HTTP_STATUS.NOT_FOUND).json({
-            message: "Ticket not found"
+            message: `${error}`
         });
     }
 }
@@ -76,7 +75,7 @@ export const createTicket = async (req: Request, res: Response): Promise<void> =
                 priority
             };
 
-            const newTicket = await ticketService.createTicket(ticketData);
+            const newTicket: Ticket = await ticketService.createTicket(ticketData);
 
             res.status(HTTP_STATUS.CREATED).json({
                 message: "Ticket created successfully",
