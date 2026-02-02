@@ -125,7 +125,7 @@ export const deleteTicket = async(req: Request, res: Response, next:NextFunction
         
         await ticketService.deleteTicket(Number(id))
         
-        res.status(HTTP_STATUS.OK).json({
+        res.status(HTTP_STATUS.NO_CONTENT).json({
             message: "Ticket deleted successfully",
         });
     } catch(error) {

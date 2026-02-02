@@ -1,6 +1,6 @@
 import { Ticket } from "src/api/v1/models/ticketModel";
 
-const ticketDate = (days: number): string => {
+export const ticketDate = (days: number): string => {
     const today = new Date();
     const date = new Date(today);
     date.setDate(date.getDate() - days);
